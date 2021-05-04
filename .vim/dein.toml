@@ -1,0 +1,14 @@
+[[plugins]]
+repo = 'junegunn/fzf'
+build_on = '''
+./install -all
+'''
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+
+[[plugins]]
+repo = 'mattn/vim-maketable'
+
+[[plugins]]
+repo = 'markonm/traces.vim'

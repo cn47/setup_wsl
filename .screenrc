@@ -1,0 +1,26 @@
+# 文字コード
+defutf8 on
+defencoding utf8
+encoding utf8 utf8
+
+# エスケープキーの変更
+escape ^Jj
+# スクロール行数
+defscrollback 1000000
+## マウススクロール有効
+# termcapinfo xterm* ti@:te@
+# 起動時メッセージ非表示
+startup_message off
+# Enable Auto detach
+autodetach on
+
+# エディタを閉じたあと画面クリア
+altscreen on
+# デフォルトシェルを指定
+shell $SHELL
+
+# カラースキーム
+defbce on
+term xterm-256color
+# ステータスバー設定
+hardstatus alwayslastline "%{r wb}%01=%H >> %{+b bB} %`%-w%{ wB} %n %t%{-}%+w %-020=%{-b wb} | %Y/%m/%d %c"
