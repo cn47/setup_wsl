@@ -5,4 +5,6 @@ alias tree='tree -C'
 
 alias gs='git status'
 alias ga='git add -A'
+alias gc="git commit -m ${1}"
+alias gp="git push"
 alias gb='git branch -avv'

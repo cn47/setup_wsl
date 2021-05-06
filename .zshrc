@@ -8,6 +8,9 @@
 export TERM=xterm-256color
 # WSL上でのscreenのソケット用ディレクトリ指定
 export SCREENDIR=$HOME/.screen
+# grepの色変更
+export GREP_COLOR='01;35'
+export GREP_COLORS=mt='01;35'
 
 #----------------------------------------- etc
 # エイリアス有効化
@@ -15,7 +18,7 @@ export SCREENDIR=$HOME/.screen
 # lsカラースキーム
 eval $(dircolors -b ~/.dircolors)
 # screen起動
-if [ $SHLVL = 1 ];then screen; fi
+if [ $SHLVL = 1 ];then screen -x work; fi
 
 #----------------------------------------- git
 # git ブランチ名を色付きで表示させるメソッド
