@@ -48,6 +48,16 @@ if len(s:removed_plugins) > 0
 endif
 " }}}
 
+" ------------------------------------------------------------------------------------------------------ fzf
+call plug#begin('~/.vim/plugged')
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+call plug#end()
+" fzf settings
+let $FZF_DEFAULT_OPTS="--layout=reverse"
+let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
+
 " ------------------------------------------------------------------------------------------------------ general
 " 行番号＋相対行番号表示
 set nu rnu
@@ -59,11 +69,11 @@ set laststatus=2
 set wildmenu
 "----------------------------------------- tab/indent/space
 " tab幅4スペース
-set tabstop=4
+set tabstop=2
 " tabを半角スペース
 set expandtab
 " vimが自動で生成するtab幅をスペース4つ文にする
-set shiftwidth=4
+set shiftwidth=2
 " 改行時などに自動インデント
 set smartindent
 " 空白文字の可視化
@@ -138,6 +148,24 @@ nn g* g*zz
 nn g# g#zz
 " ESCを二回押すことでハイライトを消す
 nmap <silent> <Esc><Esc> :nohlsearch<CR>
+" :qの抑制
+map q: :q
+"----------------------------------------- space-key kick
+let mapleader = "\<Space>"
+
+" ウィンドウ操作（タブ新規、画面分割、画面移動）
+nn <silent> <leader>t :tabnew<CR>
+nn <silent> <leader>s :new<CR>
+nn <silent> <leader>v :vnew<CR>
+nn <silent> <leader>w  <C-w>w<CR>
+
+" fzf.vim関連コマンド
+nn <silent> <leader>f :Files<CR>
+nn <silent> <leader>g :GFiles<CR>
+nn <silent> <leader>G :GFiles?<CR>
+nn <silent> <leader>b :Buffers<CR>
+nn <silent> <leader>h :History<CR>
+nn <silent> <leader>r :Rg<CR>
 
 " ------------------------------------------------------------------------------------------------------ etc
 " 前回までのカーソル位置記憶

@@ -19,6 +19,21 @@ export GREP_COLORS=mt='01;35'
 eval $(dircolors -b ~/.dircolors)
 # screen起動
 if [ $SHLVL = 1 ];then screen -x work; fi
+# time関数の出力フォーマットを変更する
+TIMEFMT=$'\n\n========================\nProgram : %J\nCPU     : %P\nuser    : %*Us\nsystem  : %*Ss\ntotal   : %*Es\n========================\n'
+
+# CTRL-zでbackgroundに戻る
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
 
 #----------------------------------------- git
 # git ブランチ名を色付きで表示させるメソッド
@@ -57,3 +72,11 @@ function rprompt-git-current-branch {
 setopt prompt_subst
 # プロンプトの右側にメソッドの結果を表示させる
 RPROMPT='`rprompt-git-current-branch`'
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# fzfの設定
+export FZF_DEFAULT_OPTS='--color=fg+:11 --height 70% --reverse --select-1 --exit-0 --multi'
+
+
