@@ -21,7 +21,8 @@ eval $(dircolors -b ~/.dircolors)
 if [ $SHLVL = 1 ];then screen -x work; fi
 # time関数の出力フォーマットを変更する
 TIMEFMT=$'\n\n========================\nProgram : %J\nCPU     : %P\nuser    : %*Us\nsystem  : %*Ss\ntotal   : %*Es\n========================\n'
-
+# リダイレクトによる上書き禁止を解除
+setopt clobber
 # CTRL-zでbackgroundに戻る
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
@@ -39,10 +40,10 @@ bindkey '^Z' fancy-ctrl-z
 # git ブランチ名を色付きで表示させるメソッド
 function rprompt-git-current-branch {
   local branch_name st branch_status
-  if [ ! -e  ".git" ]; then
-    # git 管理されていないディレクトリは何も返さない
-    return
-  fi
+#  if [ ! -e  ".git" ]; then
+#    # git 管理されていないディレクトリは何も返さない
+#    return
+#  fi
   branch_name=`git rev-parse --abbrev-ref HEAD 2> /dev/null`
   st=`git status 2> /dev/null`
   if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
