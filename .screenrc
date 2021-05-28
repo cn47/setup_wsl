@@ -3,8 +3,6 @@ defutf8 on
 defencoding utf8
 encoding utf8 utf8
 
-# エスケープキーの変更
-escape ^Jj
 # スクロール行数
 defscrollback 1000000
 ## マウススクロール有効
@@ -24,3 +22,16 @@ defbce on
 term xterm-256color
 # ステータスバー設定
 hardstatus alwayslastline "%{r wb}%01=%H >> %{+b bB} %`%-w%{ wB} %n %t%{-}%+w %-020=%{-b wb} | %Y/%m/%d %c"
+
+# ------------------------------------------------------------------------------------------------------ key binding
+# Prefixキーの設定
+escape ^Jj
+
+# Window移動
+bind j focus down
+bind k focus up
+bind h focus left
+bind l focus right
+# スクリーンロック停止
+bind ^X
+bind x

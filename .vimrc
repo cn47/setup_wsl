@@ -157,6 +157,7 @@ let mapleader = "\<Space>"
 nn <silent> <leader>t :tabnew<CR>
 nn <silent> <leader>s :new<CR>
 nn <silent> <leader>v :vnew<CR>
+nn <silent> <leader>q :q<CR>
 nn <silent> <leader>w  <C-w>w<CR>
 
 " fzf.vim関連コマンド

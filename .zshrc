@@ -75,9 +75,6 @@ setopt prompt_subst
 RPROMPT='`rprompt-git-current-branch`'
 
 
+#----------------------------------------- fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# fzfの設定
-export FZF_DEFAULT_OPTS='--color=fg+:11 --height 70% --reverse --select-1 --exit-0 --multi'
-
-
+export FZF_DEFAULT_OPTS='--color=fg+:11 --height 90% --reverse --select-1 --exit-0 --multi'
