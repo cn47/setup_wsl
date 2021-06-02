@@ -65,6 +65,12 @@ set nu rnu
 set title
 " ステータスラインの有効化
 set laststatus=2
+" ステータスライン：ファイル情報
+set statusline=%F%m%r%h%w[Buf:%n]
+" ステータスライン：以降は右寄せ表示
+set statusline+=%=
+" ステータスライン：行・列の数表示
+set statusline+=[Line=%l/%L(%p%%),Cur=%v]
 " ファイル名補間
 set wildmenu
 "----------------------------------------- tab/indent/space
