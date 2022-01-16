@@ -58,6 +58,13 @@ let $FZF_DEFAULT_OPTS="--layout=reverse"
 let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
 
+" ------------------------------------------------------------------------------------------------------ NERDtree
+" Ctrl-nでNERDTreeを開く
+map <C-n> :NERDTreeToggle<CR>
+" 隠しファイルを表示する
+let NERDTreeShowHidden=1
+" ツリー幅
+let NERDTreeWinSize=50
 " ------------------------------------------------------------------------------------------------------ general
 " 行番号＋相対行番号表示
 set nu rnu
@@ -173,6 +180,16 @@ nn <silent> <leader>G :GFiles?<CR>
 nn <silent> <leader>b :Buffers<CR>
 nn <silent> <leader>h :History<CR>
 nn <silent> <leader>r :Rg<CR>
+
+" コマンドラインショートカット
+cno <C-a> <Home>
+cno <C-e> <End>
+cno <C-p> <Up>
+cno <C-n> <Down>
+cno <C-b> <Left>
+cno <C-f> <Right>
+cno <C-b> <S-Left>
+cno <C-f> <S-Right>
 
 " ------------------------------------------------------------------------------------------------------ etc
 " 前回までのカーソル位置記憶

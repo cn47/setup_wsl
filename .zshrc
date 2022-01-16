@@ -15,10 +15,12 @@ export GREP_COLORS=mt='01;35'
 #----------------------------------------- etc
 # エイリアス有効化
 . ~/.alias
-# lsカラースキーム
-eval $(dircolors -b ~/.dircolors)
-# screen起動
+# screen(work)起動
 if [ $SHLVL = 1 ];then screen -x work; fi
+## Preztoテーマ適用
+autoload -Uz promptinit
+promptinit
+prompt bigfade 17 27 245 111
 # time関数の出力フォーマットを変更する
 TIMEFMT=$'\n\n========================\nProgram : %J\nCPU     : %P\nuser    : %*Us\nsystem  : %*Ss\ntotal   : %*Es\n========================\n'
 # リダイレクトによる上書き禁止を解除
@@ -35,6 +37,9 @@ fancy-ctrl-z () {
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
+
+# lsカラースキーム
+#eval $(dircolors -b ~/.dircolors)
 
 #----------------------------------------- git
 # git ブランチ名を色付きで表示させるメソッド
@@ -78,3 +83,6 @@ RPROMPT='`rprompt-git-current-branch`'
 #----------------------------------------- fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--color=fg+:11 --height 90% --reverse --select-1 --exit-0 --multi'
+
+#----------------------------------------- etc
+

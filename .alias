@@ -1,17 +1,59 @@
+### Set Parameter ##############################################################
 alias v='vim'
-alias ..='cd ..'
 alias rm='yes | rm'
 alias tree='tree -C'
-alias va='vim `find . | fzf --color=fg+:11 --height 90% --reverse --select-1 --exit-0 --multi --preview "head -n 300 {}"`'
-alias pre='find . | fzf --color=fg+:11 --height 90% --reverse --select-1 --exit-0 --multi --preview "head -n 300 {}"'
+alias e=''
 
-alias gs='git status'
+# git
 alias ga='git add -A'
+alias gb='git -P branch -avv'
 alias gc="git commit -m ${1}"
-alias gp="git push"
-alias gb='git branch -avv'
+alias gd='git diff'
+alias gl='git log'
+alias gs='git status --ignored'
 
+### Set Function ###############################################################
+# git add -> commit -> push
+gip(){
+  git add -A
+  git commit -m "${1}"
+  git push
+}
 
-function f() {
+# mkdir & cd
+md() {
+  mkdir -p $1 && cd $_
+}
+# cd & ll
+cl() {
+  cd $1 && ll
+}
+# find
+f(){
   find ./ -name "*${1}*"
 }
+
+### fzf
+# find & fzf & cd
+fd() {
+  target=$1
+  cd `find ${target:-~/} -name '*' -type d | fzf`
+}
+
+# find & fzf & preview(現在地起点)
+prev() {
+  target=$1
+  find ${target:-~/} | fzf --preview "head -n 300 {}"
+}
+# find & fzf & preview & vim
+va(){
+  target=$1
+  vim `prev`
+}
+
+select-history() {
+    BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+      CURSOR=$#BUFFER
+}
+zle -N select-history
+bindkey '^r' select-history

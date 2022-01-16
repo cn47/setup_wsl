@@ -35,3 +35,7 @@ bind l focus right
 # スクリーンロック停止
 bind ^X
 bind x
+
+# ------------------------------------------------------------------------------------------------------ default window
+screen -t zsh 0
+screen -t python 1

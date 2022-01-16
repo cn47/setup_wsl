@@ -3,6 +3,7 @@ repo = 'junegunn/fzf'
 build_on = '''
 ./install -all
 '''
+
 [[plugins]]
 repo = 'junegunn/fzf.vim'
 
@@ -11,3 +12,47 @@ repo = 'mattn/vim-maketable'
 
 [[plugins]]
 repo = 'markonm/traces.vim'
+
+[[plugins]]
+repo = 'preservim/nerdtree'
+
+
+
+# [[plugins]]
+# repo = 'skanehira/preview-markdown.vim'
+
+
+
+
+### Python
+# https://hachibeechan.hateblo.jp/entry/vim-customize-for-python
+
+# [[plugins]]
+# # IDEの様なオムニ補完を提供してくれるプラグインです。 neocompleteと一緒に設定するといいでしょう。
+# repo = 'davidhalter/jedi-vim'
+# on_ft = 'python'
+
+[[plugins]]
+# Pythonのソースコードに対して、静的検査やスタイルチェックをかけてくれるプラグインです。エラーがあった場所を赤くハイライトしてくれます。
+# ケアレスミスがなくなります。
+repo = 'andviro/flake8-vim'
+
+[[plugins]]
+# Vim標準のPythonのインデントは挙動が不審で、普通に書いているとpep8に違反してしまうため、こちらを入れることで快適にコーディング出来るようになります。
+repo = 'hynek/vim-python-pep8-indent'
+
+
+#[[plugins]]
+## Vim内のPython環境とvirtualenvを連動させてくれるプラグインです。必須です。
+#repo = 'jmcantrell/vim-virtualenv'
+
+
+# [[plugins]]
+# # インデント単位でテキストオブジェクトを使えるようになります。
+# # インデントの調整や、コメントアウトなどPythonでは大変便利なテキストオブジェクトです。
+# repo = 'kana/vim-textobj-indent'
+
+# [[plugins]]
+# # Pythonの関数やクラスをテキストオブジェクトとして扱えるようになります。便利です。
+# repo = 'bps/vim-textobj-python'
+
