@@ -14,7 +14,8 @@ main(){
 #  setup_prezto
 #  link_dotfiles
 #  setup_vim_colorscheme
-  install_pyenv
+#  install_pyenv
+  install_python_package
 #  docker_wsl_setup
 }
 
@@ -84,11 +85,49 @@ setup_vim_colorscheme(){ : 'vimのcolorscheme追加'
   mv ${to_dir}/tender.vim/colors/tender.vim ${to_dir}/colors/
 }
 install_pyenv(){ : 'pyenvインストール'
+  pyver=3.10.2
+
   git clone https://github.com/pyenv/pyenv.git ${HOME}/.pyenv
-  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zprofile
-  echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zprofile
-  echo 'eval "$(pyenv init --path)"' >> ${HOME}/.zprofile
-  . ${HOME}/.zshrc
+  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ${HOME}/.zprofile
+  echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ${HOME}/.zprofile
+  echo 'eval "$(pyenv init --path)"' >> ~/.zprofile
+  echo 'eval "$(pyenv init -)"' >> ${HOME}/.zprofile
+  . ${HOME}/.zprofile
+
+  # install required packages for building python by pyenv
+  sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
+    libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+    libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+
+  # python install
+  pyenv install $pyver
+  pyenv global $pyver
+  echo "python global is `python -V`"
+
+  # pip upgrade
+  sudo pip3 install --upgrade pip
+}
+
+install_python_package(){ : 'HOME以下に.venvを作ってpip install. pyenv管理のpythonk環境に対して行う'
+  # specify the python env
+  pyver=3.10.2
+  venv_dpath=${HOME}/.venv
+  pyenv global $pyver
+
+  # venv
+  python3 -m venv ${venv_dpath}
+  . ${venv_dpath}/bin/activate
+  pip install --upgrade pip
+
+  # pip install # sudoつけるとpyenvで管理してるpythonでなくsystemの方にinstallしにいくのでsudoなし
+  yes | pip install \
+    ipython \
+    pandas \
+    numpy \
+    glances
+
+  # 起動時にvenv環境に入れるようにする
+  echo ". ${venv_dpath}/bin/activate" >> ${HOME}/.zshrc
 }
 
 docker_wsl_setup(){ 'WSL環境にて動くようdocker / docker-composeインストール'
