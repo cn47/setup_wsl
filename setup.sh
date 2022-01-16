@@ -15,7 +15,7 @@ main(){
 #  link_dotfiles
 #  setup_vim_colorscheme
 #  install_pyenv
-  install_python_package
+#  install_python_package
 #  docker_wsl_setup
 }
 
@@ -71,7 +71,13 @@ setup_prezto(){ : 'preztoインストール'
   # edit colorscheme(blue -> cyan)
   sed -i -e 's/{4}/{6}/g' ~/.zprezto/modules/prompt/functions/prompt_sorin_setup
 
-  echo 'WSL環境なら追加でPreztoコマンド補間高速化するための操作を実施しましょう'
+  ''' WSL環境の場合、Preztoコマンド補間高速化するために以下実施
+
+    ### /etc/wsl.confを作成し、以下を追記
+    [interop]
+    appendWindowsPath = false
+    enabled = false
+  '''
 }
 link_dotfiles(){ : 'dotfilesを$HOME以下にリンク付'
   sh ./dotfilesLink.sh
@@ -105,7 +111,7 @@ install_pyenv(){ : 'pyenvインストール'
   echo "python global is `python -V`"
 
   # pip upgrade
-  sudo pip3 install --upgrade pip
+  yes | pip3 install --upgrade pip
 }
 
 install_python_package(){ : 'HOME以下に.venvを作ってpip install. pyenv管理のpythonk環境に対して行う'
@@ -117,10 +123,10 @@ install_python_package(){ : 'HOME以下に.venvを作ってpip install. pyenv管
   # venv
   python3 -m venv ${venv_dpath}
   . ${venv_dpath}/bin/activate
-  pip install --upgrade pip
+  yes | pip3 install --upgrade pip
 
   # pip install # sudoつけるとpyenvで管理してるpythonでなくsystemの方にinstallしにいくのでsudoなし
-  yes | pip install \
+  yes | pip3 install \
     ipython \
     pandas \
     numpy \
@@ -132,6 +138,8 @@ install_python_package(){ : 'HOME以下に.venvを作ってpip install. pyenv管
 
 docker_wsl_setup(){ 'WSL環境にて動くようdocker / docker-composeインストール'
   ### install docker
+  ## Ref: https://docs.docker.com/engine/install/ubuntu/
+
   # uninstall old versions
   sudo apt-get remove -y docker docker-engine docker.io containerd runc
 
@@ -154,7 +162,7 @@ docker_wsl_setup(){ 'WSL環境にて動くようdocker / docker-composeインス
   sudo apt-get install docker-ce docker-ce-cli containerd.io
 
   # install docker-compose
-  sudo pip3 install -y docker-compose
+  yes | pip3 install docker-compose
 
   ### docker group
   # add login user to dockert group
