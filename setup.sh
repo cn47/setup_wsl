@@ -84,10 +84,11 @@ setup_vim_colorscheme(){
   git clone https://github.com/jacoborus/tender.vim.git ${to_dir}/tender.vim
   mv ${to_dir}/tender.vim/colors/tender.vim ${to_dir}/colors/
 }
-install_pyenv(){ ############ 工事中
+install_pyenv(){
   git clone https://github.com/pyenv/pyenv.git ${HOME}/.pyenv
+  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zprofile
+  echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zprofile
   echo 'eval "$(pyenv init --path)"' >> ${HOME}/.zprofile
-  echo 'eval "$(pyenv init -)"' >> ${HOME}/.zshrc
   . ${HOME}/.zshrc
 }
 
