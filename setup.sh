@@ -19,10 +19,10 @@ main(){
 }
 
 ### Define Function ############################################################
-set_password(){
+set_password(){ : 'パスワード設定'
   echo -e "${pw}\n${pw}\n" | sudo -S passwd `whoami`
 }
-add_sudoers(){
+add_sudoers(){ : 'ログインユーザををsudoers追加'
   cat<<EOT > /tmp/iam
 Defaults  secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
 User_Alias IAM = `whoami`
@@ -35,11 +35,10 @@ EOT
   echo "*** sudoers done."
 
 }
-update_linux_package(){
-  # パッケージ情報update / パッケージのアップグレード
+update_linux_package(){ : ' linuxパッケージ情報update&パッケージupgrade'
   sudo apt-get update -y && sudo apt-get upgrade -y
 }
-install_linux_package(){
+install_linux_package(){ : 'linuxパッケージインストール'
   sudo apt install -y \
     jq \
     # mailutils \
@@ -50,7 +49,7 @@ install_linux_package(){
     ripgrep \
     python3-pip
 }
-login_zsh(){
+login_zsh(){ : 'zshをデフォルトSHELLに設定しzshでログイン'
   # create empty zshrc
   touch ${HOME}/.zshrc
   # set zsh as default shell
@@ -58,7 +57,7 @@ login_zsh(){
   # relogin zsh
   exec -l `which zsh`
 }
-setup_prezto(){
+setup_prezto(){ : 'preztoインストール'
   git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
   # creat config
   echo '
@@ -73,10 +72,10 @@ setup_prezto(){
 
   echo 'WSL環境なら追加でPreztoコマンド補間高速化するための操作を実施しましょう'
 }
-link_dotfiles(){
+link_dotfiles(){ : 'dotfilesを$HOME以下にリンク付'
   sh ./dotfilesLink.sh
 }
-setup_vim_colorscheme(){
+setup_vim_colorscheme(){ : 'vimのcolorscheme追加'
   to_dir=${HOME}/.vim
   # make dir for save colorscheme
   mkdir -p ${to_dir}/colors
@@ -84,7 +83,7 @@ setup_vim_colorscheme(){
   git clone https://github.com/jacoborus/tender.vim.git ${to_dir}/tender.vim
   mv ${to_dir}/tender.vim/colors/tender.vim ${to_dir}/colors/
 }
-install_pyenv(){
+install_pyenv(){ : 'pyenvインストール'
   git clone https://github.com/pyenv/pyenv.git ${HOME}/.pyenv
   echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zprofile
   echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zprofile
@@ -92,7 +91,7 @@ install_pyenv(){
   . ${HOME}/.zshrc
 }
 
-docker_wsl_setup(){
+docker_wsl_setup(){ 'WSL環境にて動くようdocker / docker-composeインストール'
   ### install docker
   # uninstall old versions
   sudo apt-get remove -y docker docker-engine docker.io containerd runc
@@ -114,6 +113,9 @@ docker_wsl_setup(){
   # install Docker Engine
   sudo apt-get update
   sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+  # install docker-compose
+  sudo pip3 install -y docker-compose
 
   ### docker group
   # add login user to dockert group
