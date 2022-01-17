@@ -84,5 +84,19 @@ RPROMPT='`rprompt-git-current-branch`'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--color=fg+:11 --height 90% --reverse --select-1 --exit-0 --multi'
 
+
+#----------------------------------------- multi-dot cd
+function replace_multiple_dots() {
+  local dots=$LBUFFER[-2,-1]
+  if [[ $dots == ".." ]]; then
+    LBUFFER=$LBUFFER[1,-3]'../.'
+  fi
+  zle self-insert
+}
+
+zle -N replace_multiple_dots
+bindkey "." replace_multiple_dots
+
+
 #----------------------------------------- etc
 
