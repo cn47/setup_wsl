@@ -10,6 +10,7 @@ main(){
 #  add_sudoers
 #  update_linux_package
 #  install_linux_package
+#  install_fzf
 #  login_zsh
 #  setup_prezto
 #  link_dotfiles
@@ -46,9 +47,12 @@ install_linux_package(){ : 'linuxパッケージインストール'
     tree \
     zip \
     zsh \
-    fzf \
     ripgrep \
     python3-pip
+}
+install_fzf(){
+  git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.fzf
+  ${HOME}/.fzf/install
 }
 login_zsh(){ : 'zshをデフォルトSHELLに設定しzshでログイン'
   # create empty zshrc
