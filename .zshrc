@@ -85,8 +85,8 @@ RPROMPT='`rprompt-git-current-branch`'
 export FZF_DEFAULT_OPTS='--color=fg+:11 --height 90% --reverse --select-1 --exit-0 --multi'
 
 
-#----------------------------------------- multi-dot cd
-function replace_multiple_dots() {
+#----------------------------------------- zle
+replace_multiple_dots() {
   local dots=$LBUFFER[-2,-1]
   if [[ $dots == ".." ]]; then
     LBUFFER=$LBUFFER[1,-3]'../.'
@@ -96,6 +96,13 @@ function replace_multiple_dots() {
 
 zle -N replace_multiple_dots
 bindkey "." replace_multiple_dots
+
+select-history() {
+  BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  CURSOR=$#BUFFER
+}
+zle -N select-history
+bindkey '^r' select-history
 
 
 #----------------------------------------- etc

@@ -21,7 +21,7 @@ gip(){
 }
 
 # mkdir & cd
-md() {
+mkcd() {
   mkdir -p $1 && cd $_
 }
 # cd & ll
@@ -51,9 +51,10 @@ va(){
   vim `prev`
 }
 
-select-history() {
-    BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
-      CURSOR=$#BUFFER
+# docker
+dc(){
+  docker-compose $1
 }
-zle -N select-history
-bindkey '^r' select-history
+dopr(){
+  docker system prune -a
+}
