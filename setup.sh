@@ -18,6 +18,7 @@ main(){
 #  install_pyenv
 #  install_python_package
 #  docker_wsl_setup
+#  sh build_and_install_vim.sh
 }
 
 ### Define Function ############################################################

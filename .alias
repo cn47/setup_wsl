@@ -53,7 +53,7 @@ va(){
 
 # docker
 dc(){
-  docker-compose $1
+  docker-compose $@
 }
 dopr(){
   docker system prune -a

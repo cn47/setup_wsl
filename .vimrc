@@ -65,6 +65,28 @@ map <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 " ツリー幅
 let NERDTreeWinSize=50
+
+" ------------------------------------------------------------------------------------------------------ vim-slime
+" use screen
+let g:slime_target = "screen"
+" use ipython
+let g:slime_python_ipython = 1
+" cellの区切り文字
+let g:slime_cell_delimiter = "# %%"
+" 環境変数$STYからGNU Screenのセッション名を取得。対象window nameはipython3
+let g:slime_default_config = {"sessionname": $STY, "windowname": "ipython3"}
+" 接続先情報はユーザ入力させない
+let g:slime_dont_ask_default = 1
+
+" mappings
+" 選択範囲実行
+xm <F5> <Plug>SlimeRegionSend
+nm <F5> <Plug>SlimeParagraphSend
+" セル実行
+nn <F6> :IPythonCellExecuteCellVerbose<CR>
+" セル実行して次のセルへ移動
+nn <C-M> :IPythonCellExecuteCellVerboseJump<CR>
+
 " ------------------------------------------------------------------------------------------------------ general
 " 行番号＋相対行番号表示
 set nu rnu
@@ -160,7 +182,7 @@ nn # #zz
 nn g* g*zz
 nn g# g#zz
 " ESCを二回押すことでハイライトを消す
-nmap <silent> <Esc><Esc> :nohlsearch<CR>
+nm <silent> <Esc><Esc> :nohlsearch<CR>
 " :qの抑制
 map q: :q
 "----------------------------------------- space-key kick
@@ -208,6 +230,9 @@ augroup AutoSaveFolds
 augroup end
 set viewoptions=folds,cursor
 set sessionoptions=folds
+
+" Insertから抜ける時pasteモードを解除
+autocmd InsertLeave * set nopaste
 
 " ------------------------------------------------------------------------------------------------------ alias
 " 行番号＋相対行番号非表示
