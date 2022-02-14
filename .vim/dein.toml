@@ -19,20 +19,27 @@ repo = 'preservim/nerdtree'
 # [[plugins]] # markdown表示(不安定なので無効化してる)
 # repo = 'skanehira/preview-markdown.vim'
 
-[[plugins]] # terminalにコードを送る
+
+[[plugins]] # Screen/Tmuxにコマンドを送る
 repo = 'jpalardy/vim-slime'
 [[plugins]] # ipython連携
 repo = 'hanschen/vim-ipython-cell'
 
-[[plugins]] # pytohn補完
+
+[[plugins]] # vim上でtermを立ててコマンドを送る
+repo = 'williamjameshandley/vimteractive'
+
+
+[[plugins]] # python補完
 repo = 'davidhalter/jedi-vim'
 on_ft = 'python'
 
 #[[plugins]] # 静的チェック
 #repo = 'andviro/flake8-vim'
 
-#[[plugins]] # pep8インデント
-#repo = 'hynek/vim-python-pep8-indent'
+[[plugins]] # pep8インデント
+repo = 'hynek/vim-python-pep8-indent'
+on_ft = 'python'
 
 [[plugins]] # vimでyamlのオートインデント
 repo = 'chase/vim-ansible-yaml'

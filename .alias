@@ -43,12 +43,11 @@ fd() {
 # find & fzf & preview(現在地起点)
 prev() {
   target=$1
-  find ${target:-~/} | fzf --preview "head -n 300 {}"
+  find ${target:-~/} | sort | fzf --preview "head -n 300 {}"
 }
 # find & fzf & preview & vim
 va(){
-  target=$1
-  vim `prev`
+  vim `prev $1`
 }
 
 # docker

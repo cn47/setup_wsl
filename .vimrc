@@ -55,7 +55,7 @@ Plug 'junegunn/fzf.vim'
 call plug#end()
 " fzf settings
 let $FZF_DEFAULT_OPTS="--layout=reverse"
-let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
+let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**' | sort"
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
 
 " ------------------------------------------------------------------------------------------------------ NERDtree
@@ -65,6 +65,14 @@ map <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 " ツリー幅
 let NERDTreeWinSize=50
+
+" ------------------------------------------------------------------------------------------------------ Jedi
+" .入力時に補完候補を表示しない
+let g:jedi#popup_on_dot = 0
+" 勝手に最初の候補を入力しない
+let g:jedi#popup_select_first = 0
+" docstringは表示しない
+autocmd FileType python setlocal completeopt-=preview
 
 " ------------------------------------------------------------------------------------------------------ vim-slime
 " use screen
@@ -85,7 +93,16 @@ nm <F5> <Plug>SlimeParagraphSend
 " セル実行
 nn <F6> :IPythonCellExecuteCellVerbose<CR>
 " セル実行して次のセルへ移動
-nn <C-M> :IPythonCellExecuteCellVerboseJump<CR>
+nn <C-m> :IPythonCellExecuteCellVerboseJump<CR>
+
+" ------------------------------------------------------------------------------------------------------ vimteractive
+" 改行文字(^[[200~)非表示
+let g:vimteractive_bracketed_paste_default = 0
+" Vertically split terminals
+let g:vimteractive_vertical = 1
+" Don't start terminals by default
+let g:vimteractive_autostart = 0
+
 
 " ------------------------------------------------------------------------------------------------------ general
 " 行番号＋相対行番号表示
@@ -185,6 +202,10 @@ nn g# g#zz
 nm <silent> <Esc><Esc> :nohlsearch<CR>
 " :qの抑制
 map q: :q
+" :set pasteのshortcut(CTRL+\ in normal)
+" nmap :sep :set paste  ...って感じに:kickでショートカット作ると:打ったときの表示が遅くなる
+map <C-\> :set paste<CR>
+
 "----------------------------------------- space-key kick
 let mapleader = "\<Space>"
 
@@ -210,8 +231,8 @@ cno <C-p> <Up>
 cno <C-n> <Down>
 cno <C-b> <Left>
 cno <C-f> <Right>
-cno <C-b> <S-Left>
-cno <C-f> <S-Right>
+"cno <C-b> <S-Left>
+"cno <C-f> <S-Right>
 
 " ------------------------------------------------------------------------------------------------------ etc
 " 前回までのカーソル位置記憶
