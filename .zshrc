@@ -11,6 +11,10 @@ export SCREENDIR=$HOME/.screen
 # grepの色変更
 export GREP_COLOR='01;35'
 export GREP_COLORS=mt='01;35'
+# python
+export PYTHONUTF8=1
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONUNBUFFERED=1
 
 #----------------------------------------- etc
 # エイリアス有効化
@@ -37,6 +41,10 @@ fancy-ctrl-z () {
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
+
+# bindkey
+bindkey '^q' backward-word
+bindkey '^y' forward-word
 
 # lsカラースキーム
 #eval $(dircolors -b ~/.dircolors)
@@ -98,7 +106,7 @@ zle -N replace_multiple_dots
 bindkey "." replace_multiple_dots
 
 select-history() {
-  BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  BUFFER=$(history -n -r 1 | fzf --exact +m --query "$LBUFFER" --prompt="History > ")
   CURSOR=$#BUFFER
 }
 zle -N select-history

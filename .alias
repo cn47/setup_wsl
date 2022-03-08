@@ -37,13 +37,13 @@ f(){
 # find & fzf & cd
 fd() {
   target=$1
-  cd `find ${target:-~/} -name '*' -type d | fzf`
+  cd `find ${target:-~/} -name '*' -type d | fzf --exact`
 }
 
 # find & fzf & preview(現在地起点)
 prev() {
   target=$1
-  find ${target:-~/} | sort | fzf --preview "head -n 300 {}"
+  find ${target:-~/} | sort | fzf --exact --preview "head -n 300 {}"
 }
 # find & fzf & preview & vim
 va(){

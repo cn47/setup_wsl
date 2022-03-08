@@ -46,3 +46,10 @@ repo = 'chase/vim-ansible-yaml'
 
 [[plugins]] # gcc/gcコメントアウト
 repo = 'tpope/vim-commentary'
+
+[[plugins]] # 自動で囲み終端生成
+repo = 'jiangmiao/auto-pairs'
+
+[[plugins]] # 範囲指定して囲み
+repo = 'tpope/vim-surround'
+

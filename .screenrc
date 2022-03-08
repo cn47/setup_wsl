@@ -38,5 +38,5 @@ bind x
 
 # ------------------------------------------------------------------------------------------------------ default window
 screen -t zsh 0
-screen -t python 1
-screen -t ipython3 9
+screen -t py 1
+screen -t py 2

@@ -159,6 +159,8 @@ set nrformats-=octal
 set hidden
 " コマンドラインモードで保存する履歴件数
 set history=500
+" yank長
+set viminfo='20,\"1000
 "----------------------------------------- colorscheme
 " コメントを濃い緑にする
 autocmd ColorScheme * highlight Comment ctermfg=59
