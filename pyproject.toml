@@ -1,0 +1,45 @@
+[tool.pysen]
+version = "0.10.1"
+
+[tool.pysen.lint]
+enable_black = true
+enable_flake8 = true
+enable_isort = true
+enable_mypy = true
+mypy_preset = "strict"
+line_length = 120
+py_version = "py39"
+isort_known_first_party=[""]
+isort_known_third_party=[""]
+[[tool.pysen.lint.mypy_targets]]
+  paths = ["."]
+
+[tool.black]
+line-length = 120
+target-version = ["py39"]
+
+[tool.isort]
+line_length = 120
+efault_section = "THIRDPARTY"
+ensure_newline_before_comments = true
+force_grid_wrap = 0
+force_single_line = false
+multi_line_output = 3
+include_trailing_comma = true
+use_parentheses = true
+known_local_folder=['config',]
+
+[tool.flake8]
+max-line-length = 120
+max-complexity = 10
+ignore = "E203,E266,W503,"
+
+[tool.mypy]
+python_version = "3.9"
+no_strict_optional = true
+ignore_missing_imports = true
+check_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests",]
+filterwarnings = ["ignore::DeprecationWarning",]

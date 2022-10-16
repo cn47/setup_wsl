@@ -66,42 +66,54 @@ let NERDTreeShowHidden=1
 " ツリー幅
 let NERDTreeWinSize=50
 
+
 " ------------------------------------------------------------------------------------------------------ Jedi
 " .入力時に補完候補を表示しない
-let g:jedi#popup_on_dot = 0
+let g:jedi#popup_on_dot=0
 " 勝手に最初の候補を入力しない
-let g:jedi#popup_select_first = 0
+let g:jedi#popup_select_first=0
 " docstringは表示しない
 autocmd FileType python setlocal completeopt-=preview
 
-" ------------------------------------------------------------------------------------------------------ vim-slime
-" use screen
-let g:slime_target = "screen"
-" use ipython
-let g:slime_python_ipython = 1
-" cellの区切り文字
-let g:slime_cell_delimiter = "# %%"
-" 環境変数$STYからGNU Screenのセッション名を取得。対象window nameはipython3
-let g:slime_default_config = {"sessionname": $STY, "windowname": "ipython3"}
-" 接続先情報はユーザ入力させない
-let g:slime_dont_ask_default = 1
+" " ------------------------------------------------------------------------------------------------------ vim-slime
+" " use screen
+" let g:slime_target = "screen"
+" " use ipython
+" let g:slime_python_ipython = 1
+" " cellの区切り文字
+" let g:slime_cell_delimiter = "# %%"
+" " 環境変数$STYからGNU Screenのセッション名を取得。対象window nameはipython3
+" let g:slime_default_config = {"sessionname": $STY, "windowname": "ipython3"}
+" " 接続先情報はユーザ入力させない
+" let g:slime_dont_ask_default = 1
 
-" mappings
-" 選択範囲実行
-xm <F5> <Plug>SlimeRegionSend
-nm <F5> <Plug>SlimeParagraphSend
-" セル実行
-nn <F6> :IPythonCellExecuteCellVerbose<CR>
-" セル実行して次のセルへ移動
-nn <C-m> :IPythonCellExecuteCellVerboseJump<CR>
+" " mappings
+" " 選択範囲実行
+" xm <F5> <Plug>SlimeRegionSend
+" nm <F5> <Plug>SlimeParagraphSend
+" " セル実行
+" nn <F6> :IPythonCellExecuteCellVerbose<CR>
+" " セル実行して次のセルへ移動
+" nn <C-m> :IPythonCellExecuteCellVerboseJump<CR>
 
 " ------------------------------------------------------------------------------------------------------ vimteractive
 " 改行文字(^[[200~)非表示
-let g:vimteractive_bracketed_paste_default = 0
+let g:vimteractive_bracketed_paste_default=1
 " Vertically split terminals
-let g:vimteractive_vertical = 1
+let g:vimteractive_vertical=0
 " Don't start terminals by default
-let g:vimteractive_autostart = 0
+let g:vimteractive_autostart=0
+
+" ------------------------------------------------------------------------------------------------------ vim-indent-guides
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_exclude_filetypes=['help', 'nerdtree']
+
+set ts=4 sw=4 noet
+let g:indent_guides_guide_size=1
+let g:indent_guides_start_level=1
+let g:indent_guides_auto_colors=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red  ctermbg=233
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=237
 
 
 " ------------------------------------------------------------------------------------------------------ general

@@ -4,6 +4,8 @@ alias rm='yes | rm'
 alias tree='tree -C'
 alias e=''
 
+alias pysen_run="pysen run_files format **/*.py; pyflakes **/*.py"
+alias rmpty="yes | find . -size 0 -ok rm {} \; > /dev/null 2>&1"
 # git
 alias ga='git add -A'
 alias gb='git -P branch -avv'
@@ -13,6 +15,10 @@ alias gl='git log'
 alias gs='git status --ignored'
 
 ### Set Function ###############################################################
+rep(){
+  grep -rl ${1} ./* | xargs -I {} sed -i -e "s/${1}/${2}/g" {}
+}
+
 # git add -> commit -> push
 gip(){
   git add -A
@@ -37,7 +43,7 @@ f(){
 # find & fzf & cd
 fd() {
   target=$1
-  cd `find ${target:-~/} -name '*' -type d | fzf --exact`
+  cd `find ${target:-~/} -name '*' -type d | fzf` # --exact`
 }
 
 # find & fzf & preview(現在地起点)
