@@ -6,3 +6,4 @@ sqlparser
 pysen
 isort
 pyflakes
+black

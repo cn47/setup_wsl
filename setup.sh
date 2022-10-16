@@ -6,20 +6,24 @@ pw=''
 
 ### Define Process #############################################################
 main(){
-  set_password
-  add_sudoers
-  link_dotfiles
-  update_linux_package
-  install_linux_package
-  install_fzf
-  login_zsh
-  setup_prezto
-  install_pyenv
-  install_python_package
-  docker_wsl_setup
-  # # sh build_and_install_vim.sh
-  setup_vim_colorscheme
-  install_japanase_font
+  # set_password
+  # add_sudoers
+  # link_dotfiles
+  # update_linux_package
+  # install_linux_package
+  # install_fzf
+  # login_zsh
+  # setup_prezto
+  # install_pyenv
+  # install_python_package
+  # docker_wsl_setup
+  # # # sh build_and_install_vim.sh
+  # setup_vim_colorscheme
+  # install_japanase_font
+
+  # cp -rf ./.config ${HOME}/ # for ptpython
+  # cp -rf ./pyproject.toml ${HOME}/ # for pysen
+
 }
 
 ### Define Function ############################################################
