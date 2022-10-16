@@ -6,7 +6,7 @@ CURRENT=`pwd`
 sudo apt install -y git gettext libtinfo-dev libacl1-dev libgpm-dev build-essential
 
 ### Python2, Python3連携に必要なツールとライブラリを導入 ...python3はだいたい入ってるだろうから多分Skipしておｋ
-sudo apt install -y python3 python3-dev
+# sudo apt install -y python3 python3-dev
 
 ### GitHubから最新版のVimをクローン
 git clone https://github.com/vim/vim.git

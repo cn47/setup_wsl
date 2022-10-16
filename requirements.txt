@@ -1,0 +1,8 @@
+glances
+ptpython
+numpy
+pandas
+sqlparser
+pysen
+isort
+pyflakes

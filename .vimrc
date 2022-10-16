@@ -247,7 +247,8 @@ cno <C-b> <Left>
 cno <C-f> <Right>
 "cno <C-b> <S-Left>
 "cno <C-f> <S-Right>
-
+" Shift+Space -> ;2u抑制
+tno <S-Space> <Space>
 " ------------------------------------------------------------------------------------------------------ etc
 " 前回までのカーソル位置記憶
 if has("autocmd")

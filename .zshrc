@@ -119,3 +119,5 @@ bindkey '^r' select-history
 
 #----------------------------------------- etc
 
+. /home/cn47/.venv/bin/activate
+. /home/cn47/.venv/bin/activate

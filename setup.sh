@@ -6,19 +6,20 @@ pw=''
 
 ### Define Process #############################################################
 main(){
-#  set_password
-#  add_sudoers
-#  update_linux_package
-#  install_linux_package
+  set_password
+  add_sudoers
+  link_dotfiles
+  update_linux_package
+  install_linux_package
   install_fzf
-#  login_zsh
-#  setup_prezto
-#  link_dotfiles
-#  setup_vim_colorscheme
-#  install_pyenv
-#  install_python_package
-#  docker_wsl_setup
-#  sh build_and_install_vim.sh
+  login_zsh
+  setup_prezto
+  install_pyenv
+  install_python_package
+  docker_wsl_setup
+  # # sh build_and_install_vim.sh
+  setup_vim_colorscheme
+  install_japanase_font
 }
 
 ### Define Function ############################################################
@@ -38,6 +39,11 @@ EOT
   echo "*** sudoers done."
 
 }
+### dotfiles
+link_dotfiles(){ : 'dotfilesを$HOME以下にリンク付'
+  sh ./dotfilesLink.sh
+}
+### Shell Package
 update_linux_package(){ : ' linuxパッケージ情報update&パッケージupgrade'
   sudo apt-get update -y && sudo apt-get upgrade -y
 }
@@ -55,6 +61,7 @@ install_fzf(){
   git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.fzf
   ${HOME}/.fzf/install
 }
+### ZSH
 login_zsh(){ : 'zshをデフォルトSHELLに設定しzshでログイン'
   # create empty zshrc
   touch ${HOME}/.zshrc
@@ -84,26 +91,16 @@ setup_prezto(){ : 'preztoインストール'
     enabled = false
   '''
 }
-link_dotfiles(){ : 'dotfilesを$HOME以下にリンク付'
-  sh ./dotfilesLink.sh
-}
-setup_vim_colorscheme(){ : 'vimのcolorscheme追加'
-  to_dir=${HOME}/.vim
-  # make dir for save colorscheme
-  mkdir -p ${to_dir}/colors
-  # fetch & install colorscheme(tender)
-  git clone https://github.com/jacoborus/tender.vim.git ${to_dir}/tender.vim
-  mv ${to_dir}/tender.vim/colors/tender.vim ${to_dir}/colors/
-}
+### Python
 install_pyenv(){ : 'pyenvインストール'
-  pyver=3.10.2
+  pyver=3.9.10
 
   git clone https://github.com/pyenv/pyenv.git ${HOME}/.pyenv
   echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ${HOME}/.zprofile
   echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ${HOME}/.zprofile
   echo 'eval "$(pyenv init --path)"' >> ~/.zprofile
   echo 'eval "$(pyenv init -)"' >> ${HOME}/.zprofile
-  . ${HOME}/.zprofile
+  # . ${HOME}/.zprofile
 
   # install required packages for building python by pyenv
   sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
@@ -118,10 +115,9 @@ install_pyenv(){ : 'pyenvインストール'
   # pip upgrade
   yes | pip3 install --upgrade pip
 }
-
 install_python_package(){ : 'HOME以下に.venvを作ってpip install. pyenv管理のpythonk環境に対して行う'
   # specify the python env
-  pyver=3.10.2
+  pyver=3.9.10
   venv_dpath=${HOME}/.venv
   pyenv global $pyver
 
@@ -131,16 +127,12 @@ install_python_package(){ : 'HOME以下に.venvを作ってpip install. pyenv管
   yes | pip3 install --upgrade pip
 
   # pip install # sudoつけるとpyenvで管理してるpythonでなくsystemの方にinstallしにいくのでsudoなし
-  yes | pip3 install \
-    ipython \
-    pandas \
-    numpy \
-    glances
+  yes | pip3 install -r requirements.txt
 
   # 起動時にvenv環境に入れるようにする
   echo ". ${venv_dpath}/bin/activate" >> ${HOME}/.zshrc
 }
-
+### Docker
 docker_wsl_setup(){ 'WSL環境にて動くようdocker / docker-composeインストール'
   ### install docker
   ## Ref: https://docs.docker.com/engine/install/ubuntu/
@@ -174,6 +166,31 @@ docker_wsl_setup(){ 'WSL環境にて動くようdocker / docker-composeインス
   sudo gpasswd -a `whoami` docker
   # grant docker group write access to docker.sock
   sudo chgrp docker /var/run/docker.sock
+}
+### VIM
+setup_vim_colorscheme(){ : 'vimのcolorscheme追加'
+  to_dir=${HOME}/.vim
+  # make dir for save colorscheme
+  mkdir -p ${to_dir}/colors
+  # fetch & install colorscheme(tender)
+  git clone https://github.com/jacoborus/tender.vim.git ${to_dir}/tender.vim
+  mv ${to_dir}/tender.vim/colors/tender.vim ${to_dir}/colors/
+}
+### Font
+install_japanase_font(){
+  cd ${HOME}
+  #azuki
+  wget http://azukifont.com/font/azukifont121.zip && unzip azukifont121.zip
+  mv azukifont121/azuki.ttf
+  rm -rf azukifont121 azukifont121.zip
+  # Ricty
+  wget https://github.com/edihbrandon/RictyDiminished/raw/master/RictyDiminished-Regular.ttf
+  # install
+  sudo mkdir /usr/share/fonts/
+  sudo mv azuki.ttf RictyDiminished-Regular.ttf /usr/share/fonts/
+  sudo apt install -y fontconfig
+  sudo fc-cache -fv
+  sudo rm -rf ${HOME}/.cache/matplotlib/fontlist-v330.json
 }
 
 
