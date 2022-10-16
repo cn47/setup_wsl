@@ -117,7 +117,11 @@ zle -N select-history
 bindkey '^r' select-history
 
 
-#----------------------------------------- etc
 
-. /home/cn47/.venv/bin/activate
+#----------------------------------------- etc
+# docker start
+if [ $(service docker status | awk '{print $4}') = "not" ]; then
+  sudo service docker start > /dev/null
+fi
+
 . /home/cn47/.venv/bin/activate

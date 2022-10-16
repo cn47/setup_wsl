@@ -170,6 +170,10 @@ docker_wsl_setup(){ 'WSL環境にて動くようdocker / docker-composeインス
   sudo gpasswd -a `whoami` docker
   # grant docker group write access to docker.sock
   sudo chgrp docker /var/run/docker.sock
+
+  ### if not work sudo service docker start. execute below
+  # sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
+  # sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 }
 ### VIM
 setup_vim_colorscheme(){ : 'vimのcolorscheme追加'
