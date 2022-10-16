@@ -6,6 +6,8 @@
 #----------------------------------------- export env
 # xterm指定
 export TERM=xterm-256color
+#tz
+export TZ=Asia/Tokyo
 # WSL上でのscreenのソケット用ディレクトリ指定
 export SCREENDIR=$HOME/.screen
 # grepの色変更
@@ -15,6 +17,8 @@ export GREP_COLORS=mt='01;35'
 export PYTHONUTF8=1
 export PYTHONDONTWRITEBYTECODE=1
 export PYTHONUNBUFFERED=1
+export PIP_DISABLE_PIP_VERSION_CHECK=on
+export PIP_NO_CACHE_DIR=off
 
 #----------------------------------------- etc
 # エイリアス有効化
@@ -106,7 +110,7 @@ zle -N replace_multiple_dots
 bindkey "." replace_multiple_dots
 
 select-history() {
-  BUFFER=$(history -n -r 1 | fzf --exact +m --query "$LBUFFER" --prompt="History > ")
+  BUFFER=$(history -n -r 1 | fzf --no-sort --exact +m --query "$LBUFFER" --prompt="History > ")
   CURSOR=$#BUFFER
 }
 zle -N select-history

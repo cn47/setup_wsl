@@ -10,7 +10,7 @@ main(){
 #  add_sudoers
 #  update_linux_package
 #  install_linux_package
-#  install_fzf
+  install_fzf
 #  login_zsh
 #  setup_prezto
 #  link_dotfiles
@@ -44,7 +44,7 @@ update_linux_package(){ : ' linuxパッケージ情報update&パッケージupgr
 install_linux_package(){ : 'linuxパッケージインストール'
   sudo apt install -y \
     jq \
-    # mailutils \
+    mailutils \
     tree \
     zip \
     zsh \
