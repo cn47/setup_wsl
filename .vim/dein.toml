@@ -53,3 +53,6 @@ repo = 'jiangmiao/auto-pairs'
 [[plugins]] # 範囲指定して囲み
 repo = 'tpope/vim-surround'
 
+[[plugins]] # indent表示
+repo = 'nathanaelkane/vim-indent-guides'
+
