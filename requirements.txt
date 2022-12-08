@@ -1,8 +1,15 @@
-glances
-ptpython
 numpy
 pandas
+polars
+matplotlib
+plotly
+
+tqdm
 sqlparser
+
+glances
+ptpython
+
 pysen
 isort
 pyflakes

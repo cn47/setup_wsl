@@ -83,7 +83,7 @@ setup_prezto(){ : 'preztoインストール'
     for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
       ln -fs "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
     done
-  '>./create_presto_config.sh && zsh create_presto_config.sh && rm create_presto_config.sh
+  '>./create_zprezto_config.sh && zsh create_zprezto_config.sh && rm create_zprezto_config.sh
   # edit colorscheme(blue -> cyan)
   sed -i -e 's/{4}/{6}/g' ~/.zprezto/modules/prompt/functions/prompt_sorin_setup
 
