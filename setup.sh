@@ -14,8 +14,7 @@ main(){
   # install_fzf
   # login_zsh
   # setup_prezto
-  # install_pyenv
-  # install_python_package
+  install_uv_and_python
   # docker_wsl_setup
   # # # sh build_and_install_vim.sh
   # setup_vim_colorscheme
@@ -96,45 +95,13 @@ setup_prezto(){ : 'preztoインストール'
   '''
 }
 ### Python
-install_pyenv(){ : 'pyenvインストール'
-  pyver=3.9.10
+install_uv_and_python(){
+  curl -LsSf https://astral.sh/uv/install.sh | sh
+  exec $SHELL -l
+  uv python install 3.13.3
+  uv venv ${HOME}/.venv
+  uv pip install -r pyproject.toml --all-extras
 
-  git clone https://github.com/pyenv/pyenv.git ${HOME}/.pyenv
-  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ${HOME}/.zprofile
-  echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ${HOME}/.zprofile
-  echo 'eval "$(pyenv init --path)"' >> ~/.zprofile
-  echo 'eval "$(pyenv init -)"' >> ${HOME}/.zprofile
-  # . ${HOME}/.zprofile
-
-  # install required packages for building python by pyenv
-  sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
-    libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
-    libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-
-  # python install
-  pyenv install $pyver
-  pyenv global $pyver
-  echo "python global is `python -V`"
-
-  # pip upgrade
-  yes | pip3 install --upgrade pip
-}
-install_python_package(){ : 'HOME以下に.venvを作ってpip install. pyenv管理のpythonk環境に対して行う'
-  # specify the python env
-  pyver=3.9.10
-  venv_dpath=${HOME}/.venv
-  pyenv global $pyver
-
-  # venv
-  python3 -m venv ${venv_dpath}
-  . ${venv_dpath}/bin/activate
-  yes | pip3 install --upgrade pip
-
-  # pip install # sudoつけるとpyenvで管理してるpythonでなくsystemの方にinstallしにいくのでsudoなし
-  yes | pip3 install -r requirements.txt
-
-  # 起動時にvenv環境に入れるようにする
-  echo ". ${venv_dpath}/bin/activate" >> ${HOME}/.zshrc
 }
 ### Docker
 docker_wsl_setup(){ 'WSL環境にて動くようdocker / docker-composeインストール'
@@ -183,6 +150,9 @@ setup_vim_colorscheme(){ : 'vimのcolorscheme追加'
   # fetch & install colorscheme(tender)
   git clone https://github.com/jacoborus/tender.vim.git ${to_dir}/tender.vim
   mv ${to_dir}/tender.vim/colors/tender.vim ${to_dir}/colors/
+  # fetch & install colorscheme(yuyuko)
+  git clone https://github.com/Enonya/yuyuko.vim.git ${to_dir}/yuyuko.vim
+  mv ${to_dir}/yuyuko.vim/colors/yuyuko.vim ${to_dir}/colors/
 }
 ### Font
 install_japanase_font(){

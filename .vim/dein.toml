@@ -30,12 +30,12 @@ repo = 'hanschen/vim-ipython-cell'
 repo = 'williamjameshandley/vimteractive'
 
 
-[[plugins]] # python補完
-repo = 'davidhalter/jedi-vim'
-on_ft = 'python'
+# [[plugins]] # python補完
+# repo = 'davidhalter/jedi-vim'
+# on_ft = 'python'
 
-#[[plugins]] # 静的チェック
-#repo = 'andviro/flake8-vim'
+# [[plugins]] # 静的チェック
+# repo = 'andviro/flake8-vim'
 
 [[plugins]] # pep8インデント
 repo = 'hynek/vim-python-pep8-indent'
@@ -56,3 +56,5 @@ repo = 'tpope/vim-surround'
 [[plugins]] # indent表示
 repo = 'nathanaelkane/vim-indent-guides'
 
+[[plugins]] # jinja2ハイライト
+repo = 'Glench/Vim-Jinja2-Syntax'

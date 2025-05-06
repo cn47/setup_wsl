@@ -1,4 +1,4 @@
- # Source Prezto.
+# Source Prezto.
  if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
    source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
  fi
@@ -51,7 +51,7 @@ bindkey '^q' backward-word
 bindkey '^y' forward-word
 
 # lsカラースキーム
-#eval $(dircolors -b ~/.dircolors)
+eval $(dircolors -b ~/.dircolors)
 
 #----------------------------------------- git
 # git ブランチ名を色付きで表示させるメソッド
@@ -124,4 +124,13 @@ if [ $(service docker status | awk '{print $4}') = "not" ]; then
   sudo service docker start > /dev/null
 fi
 
-. /home/cn47/.venv/bin/activate
+sudo hwclock --hctosys
+export PATH=$PATH:/mnt/c/AndroidSDK/platform-tools
+
+. ${HOME}/.venv/bin/activate
+
+# GPU環境
+export PATH=/usr/local/cuda-12.9/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-12.9/lib64:$LD_LIBRARY_PATH
+
+. "$HOME/.local/bin/env"

@@ -175,14 +175,16 @@ set history=500
 set viminfo='20,\"1000
 "----------------------------------------- colorscheme
 " コメントを濃い緑にする
-autocmd ColorScheme * highlight Comment ctermfg=59
+autocmd ColorScheme * highlight Comment ctermfg=59 ctermbg=none
 " 背景色
-autocmd ColorScheme * highlight Normal            ctermbg=none
+autocmd ColorScheme * highlight Normal  ctermfg=none ctermbg=none
 autocmd ColorScheme * highlight LineNr ctermfg=27 ctermbg=none
+
 " 構文ハイライト有効
 syntax on
 " カラースキーム設定
 colorscheme tender
+"colorscheme yuyuko
 " 現在の行を強調表示
 set cursorline
 highlight CursorLine cterm=none ctermfg=none ctermbg=17
